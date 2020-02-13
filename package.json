@@ -1,0 +1,25 @@
+{
+  "name": "profile-generator",
+  "version": "1.0.0",
+  "description": "Uses node to generate a profile using github",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "inquirer": "^7.0.4",
+    "octonode": "^0.9.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdvaughn/node-profile-generator.git"
+  },
+  "author": "William Vaughn",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wdvaughn/node-profile-generator/issues"
+  },
+  "homepage": "https://github.com/wdvaughn/node-profile-generator#readme"
+}
