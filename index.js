@@ -1,6 +1,7 @@
 const inquirer = require("inquirer");
 const axios = require("axios");
 const fs = require("fs");
+const pdf = require("html-pdf");
 const HTML = require("./generateHTML");
 const questions = [
     {
@@ -15,17 +16,15 @@ const questions = [
     }
 ];
 
-async function writeToFile(fileName, data)
-{
-    try
-    {
+async function writeToFile(fileName, data) {
+    try {
         const queryURL = `https://api.github.com/users/${data.username}`;
-        
+
         const gitData = await axios.get(queryURL);
 
         const starData = await axios.get(`${queryURL}/starred`)
 
-        const info = 
+        const info =
         {
             color: data.color,
             avatar_url: gitData.data.avatar_url,
@@ -44,16 +43,22 @@ async function writeToFile(fileName, data)
             if (err) throw err;
 
             console.log("finished writing file");
+
+            const htmlFile = fs.readFileSync(fileName, "utf8");
+
+            pdf.create(htmlFile).toFile("./profile.pdf", (err, res) => {
+                if (err) throw err;
+
+                console.log("pdf writen")
+            })
         });
     }
-    catch (err)
-    {
+    catch (err) {
         throw err;
     }
 }
 
-function init()
-{
+function init() {
     inquirer.prompt(questions).then(data => {
         const fileName = `index.html`;
         writeToFile(fileName, data);
